@@ -318,3 +318,69 @@ for sinif in ["S", "M", "İ"]:
 
 
 #--------------------Iterator and Comprehension------------
+monthh="may"
+iterator=iter(monthh)   
+print(next(iterator)) #ansver: m
+print(next(iterator)) #ansver: a    
+print(next(iterator)) #ansver: y
+#print(next(iterator)) #ansver: error
+
+
+#Comprehension İndiyə qədər bir siyahının elementləri üzərində əməliyyat aparmaq üçün for dövründən 
+#istifadə etdik. Bəzi hallarda isə bu prosesi daha qısa və oxunaqlı formada ifadə edə bilərik.
+#Python bunu comprehension konstruksiyaları ilə təmin edir.
+ededler = [5, 7, 96, 23, 4]
+kvadratlar = []
+
+for eded in ededler:
+    kvadratlar.append(eded**2)
+    print(kvadratlar) #ansver: [25, 49, 9216, 529, 16]
+#Bunu comprehension üsulu ilə aşağıdakı kimi yaza bilərik:
+kvadratlar = [eded ** 2 for eded in ededler]
+print(kvadratlar)
+
+kvadratlar=[i**2 for i in range(1,6) if i%2==0] #if ile filterleme
+print(kvadratlar) #ansver: [1, 4, 9, 16, 25] 
+
+netice=[i**2 if i%2==0 else i**3 for i in range(1,6)] #if else ile filterleme
+print(netice) #ansver: [1, 4, 27, 16, 125]
+
+tekler = {eded for eded in ededler if eded % 2 == 1}
+
+seherler=["Bakı", "Gəncə", "Sumqayıt", "Şəki"]
+seherler_dist={}
+
+for seher in seherler:
+    seherler_dist[seher]=len(seher)
+print(seherler_dist) #ansver: {'Bakı': 3, 'Gəncə': 5, 'Sumqayıt': 7, 'Şəki': 4}
+
+seherler_dist={seher:len(seher) for seher in seherler}
+print(seherler_dist) #ansver: {'Bakı': 3, 'Gəncə': 5, 'Sumqayıt': 7, 'Şəki': 4}
+
+numbers1 = [1, 2, 3]
+numbers2 = [10, 20, 30]
+result=[]
+
+for n1 in numbers1:
+    for n2 in numbers2:
+        result.append(n1*n2)
+    print(result) #ansver: [10, 20, 30, 20, 40, 60, 30, 60, 90]
+result=[n1*n2 for n1 in numbers1 for n2 in numbers2]    
+print(result) #ansver: [10, 20, 30, 20, 40, 60, 30, 60, 90]
+
+#Iterable bizim deyiseni teyin etdiyimiz bir arr veya obj ola biler Iterator ise iterable-in icindeki 
+#elementleri teker teker goturmek ucun istifade olunan veya yaranan bir objedir.
+
+
+#-------------------funksion------------------
+#Python-da funksiya yaratmaq üçün def açar sözündən istifadə olunur.
+def ilk_funksiya():
+    print("May")
+
+def bolenler(eded):
+    b=[]
+    for i in range(1, eded+1):
+        if eded%i==0:
+            b.append(i)
+
+    return b
