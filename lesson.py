@@ -384,3 +384,186 @@ def bolenler(eded):
             b.append(i)
 
     return b
+
+def orta_hesabla(siyahi):
+    say = 0
+    toplam = 0
+
+    for eded in siyahi:
+        say += 1
+        toplam += eded
+
+    orta = toplam / say
+
+    return orta
+
+ededler=[5, 96, 27, 7, 9]
+
+ortalama=orta_hesabla(ededler)
+
+print(ortalama)
+
+def hasil(*args):
+    netice = 1
+
+    for eded in args:
+        netice *= eded
+
+    return netice
+print(hasil(5, 96, 5))
+
+#kwargs isə key-value formasında göndərilən arqumentləri qəbul edir.
+
+def melumat(**kwargs):
+    for key, value in kwargs.items():
+        print(key, ":", value)
+melumat(
+    month="May",
+    year=1996,
+    day=5
+) #ansver: month : May year : 1996 day : 5
+
+def quvvet(x, a, b):
+    q1 = x ** a
+    q2 = x ** b
+
+    return q1, q2
+netice = quvvet(5, 2, 3)
+
+n = 3
+
+def hesabla(x):
+    global n
+
+    n += 1
+
+    return x ** n
+
+print(hesabla(5))
+
+# yield istifadə olunan funksiya generator function adlanır. Belə funksiyanı çağırdıqda generator obyekti
+# əldə edirik; funksiya dərhal bütün kodu icra etmir.böyük məlumatlarla işləyərkən yaddaşa qənaət etməyə 
+# kömək edə bilər.return ilə bütün nəticəni bir dəfəyə ala bilərsən, yield ilə isə lazım olduqca bir-bir
+# götürə bilərsən. yield xüsusilə böyük məlumatlarla işləyərkən yaddaşa qənaət edə bilər.
+
+def test():
+    print("Birinci")
+    yield 10
+
+    print("İkinci")
+    yield 20
+
+    print("Üçüncü")
+    yield 30
+
+it = test()
+
+print(next(it))
+print(next(it))
+print(next(it))
+
+#Biz funksiyaları belə çağırırıq: len(), quvvet() və s. Lakin bəzi funksiyalar konkret obyektə aid olur.
+#Bunlara metod deyilir.Yəni, metod müəyyən obyektə bağlı olan funksiyadır.
+
+siyahi = [5, 96, 98]
+print(len(siyahi))  # funksiya  cavab: 3
+siyahi.append(27)  # metod ansver: [5, 96, 98, 27]
+
+#Bəzən bir funksiyanın öz daxilində yenidən özünü çağırmasına ehtiyac yaranır. Funksiyanın özünü 
+#çağırmasına rekursiya (recursion) deyilir.Rekursiyanın mütləq dayanma şərti olmalıdır. Əks halda, 
+#funksiya sonsuz şəkildə özünü çağırmağa çalışar.
+def faktorial(n):
+    if n==1:
+        return 1
+
+    return n*faktorial(n-1)  #burda funksiya ozunu cagirib
+print(faktorial(5))
+
+#Python-da Generator — dəyərləri hamısını birdən yaratmaq əvəzinə, bir-bir yaradan xüsusi obyekt növüdür.
+# Bu, yaddaşa qənaət etməyə kömək edir və böyük məlumatlarla işləyərkən faydalıdır.
+
+#next(it) — növbəti dəyəri götürür.
+
+#Expression — Python-da hesablandıqda müəyyən bir dəyər verən kod ifadəsidir.
+#  Məsələn, 5 + 3 ifadəsi 8 nəticəsini verir.Yadda saxlamaq üçün: Expression = ifadə, Result = nəticə.
+
+
+# Proqram yazarkən hər funksiyanı sıfırdan özümüz yazmağa ehtiyac yoxdur. Python-da müxtəlif məqsədlər
+#  üçün əvvəlcədən hazırlanmış çoxlu modullar mövcuddur. Məsələn, riyazi hesablamalar üçün lazım olan
+# bəzi funksiyalar artıq Python-da hazır şəkildə mövcuddur. Tutaq ki, biz faktorial hesablamaq istəyirik.
+# Bunun üçün ayrıca faktorial funksiyası yazmaq əvəzinə Python-un math modulunda olan hazır funksiyadan 
+#istifadə edə bilərik. Bunun üçün əvvəlcə modulu proqramımıza import edirik:
+
+import math
+print(math.factorial(5)) #ansver: 120   
+
+# import ilə from … import … arasındakı fərq--import math bütün modulu import edir, from math import 
+# sqrt isə konkret sqrt funksiyasını import edir.  sqrt(her hansi bir funksiyadir)
+
+#lambda Python-da qısa, adsız funksiya yaratmaq üçün istifadə olunur. Yəni adi def ilə funksiya yazmaq 
+#əvəzinə, bəzi hallarda onu bir sətirdə yaza bilərik.qisa yazmaq ucun istifade olunur. 
+kvadrat = lambda x: x ** 2
+print(kvadrat(5))
+
+ticket_price = lambda age: 5 if age < 18 else 10
+print(ticket_price(15))  # 5
+print(ticket_price(30))  # 10
+
+
+#for dövründə hər addımı özün yazırsan, map() isə verdiyin funksiyanı elementlərə tətbiq edir.
+#Python-da map() nəticəni dərhal siyahı kimi yaratmır; map obyekti qaytarır və nəticələri tələb olunduqca
+#verir. list() yazdıqda isə nəticələr siyahıya yığılır.
+def kvadrat(x):
+    return x**2
+netice = list(map(kvadrat, ededler))
+
+
+ededler=[5, 3, 23, 21, 96]
+cut_yoxla=lambda x: x%2==0 # hər element üçün True və ya False qaytarır.
+cutler = list( filter(cut_yoxla, ededler))
+
+#reduce map() hər elementə uyğun funksiyanı tətbiq edirdi. filter() şərtə uyğun elementləri seçirdi. 
+#reduce() isə bütün elementləri ardıcıl şəkildə birləşdirərək tək bir nəticə yaradır.Qeyd: reduce istifadə 
+#etmək üçün əvvəlcə onu import etmək lazımdır. functools modulundan import etməliyik.reduce() isə 
+#elementləri bir-biri ilə birləşdirərək sonda tək bir nəticə əldə etmək üçün istifadə olunur.
+
+
+#Machine Learning-də modelə əvvəlcə nümunə məlumatlar veririk. Model bu məlumatlardan uyğun xətti 
+#tapmağa çalışır. Buna training (öyrətmə) deyilir.Sonra proqnozları həqiqi nəticələrlə müqayisə edir. Fərqə error (səhv) deyirik.
+# Məsələn, həqiqi nəticə 5, modelin proqnozu isə 4 olsa:Error=5-4=1
+#səhvi necə ölçürük? — MSE--Linear Regression üçün çox istifadə olunan ölçülərdən biri Mean Squared Error
+#(MSE) — orta kvadratik səhvdir.
+
+# Təlim məlumatları
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 5, 4, 6]
+
+# 1. Ortalamaları hesablayırıq
+x_orta = sum(x) / len(x)        #Bütün ədədləri toplayıb sayına bölür. Yəni ortalamanı hesablayır.  
+y_orta = sum(y) / len(y)        #Bütün ədədləri toplayıb sayına bölür. Yəni ortalamanı hesablayır.
+
+# 2. Xəttin meylini (w) tapırıq
+surət = sum(
+    (x[i] - x_orta) * (y[i] - y_orta)
+    for i in range(len(x))    #Siyahıdakı elementləri indeksləri ilə bir-bir gəzərək hesablamalar aparır
+)
+
+mexrec = sum(
+    (x[i] - x_orta) ** 2
+    for i in range(len(x))
+)
+
+w = surət / mexrec    #Məlumatlara uyğun xəttin meylini hesablayır.
+
+# 3. Başlanğıc sabitini (b) tapırıq 
+b = y_orta - w * x_orta
+
+# 4. Modelin nəticələrini göstəririk
+print("w =", w)
+print("b =", b)
+
+# 5. Yeni proqnoz
+yeni_saat = 6
+proqnoz = w * yeni_saat + b   #Tapılmış xəttdən istifadə edərək yeni qiymət proqnozlaşdırır:
+
+print("Proqnoz:", proqnoz)
