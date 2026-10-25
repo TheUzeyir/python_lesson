@@ -618,3 +618,143 @@ print("Ədədlər: ", scores)
 result = binary_search(scores, 20)
 
 print(result)
+
+
+
+#Alqoritm mürəkkəbliyi(Algorithm Complexity)Burada iki əsas anlayışdan danışacağıq: 
+# Time Complexity-input böyüdükcə alqoritmin tələb etdiyi əməliyyatların miqyası necə dəyişir?
+# Space Complexity- input böyüdükcə alqoritmin tələb etdiyi əlavə yaddaş necə dəyişir?
+
+#Time Complexity-Aşağıdakı koda baxaq:
+
+numbers = [5, 23, 24, 96, 26, 25]
+
+for number in numbers:
+    print(number)
+
+#Dövr 6 dəfə işlədi. Ümumi halda siyahıda n element varsa, dövr də n dəfə işləyəcək. Yəni input böyüdükcə
+#addım sayı da təxminən xətti şəkildə artır. Bunu belə göstəririk: O(n)Burada, n input-un ölçüsüdür.
+#Big O Notation-Big O bizə alqoritmin input böyüdükcə necə miqyaslandığını təsvir etməyə imkan verir.
+#Qeyd: Big O saniyə ölçmür.
+
+
+#O(1) -> Constant Time
+print("Ədədlər:", numbers)
+print(numbers[2]) #ansver 24
+#Birbaşa 2-ci indeksdəki elementi gətiririk. Yəni 6 element də olsa, 100 element də olsa, birbaşa 
+#istənilən indeksdəki element götürüləcək. Yəni input-un ölçüsü artdıqca əməliyyatların sayı onunla 
+#proporsional şəkildə artmır.
+
+#O(n) -> Linear Time
+print("Ədədlər:", numbers)
+
+target = 96
+
+for number in numbers:
+    if number == target:
+        print("Tapıldı")
+        break
+
+else:
+    print("Tapılmadı")
+
+#Ən pis hal nədir? Ya axtarılan ədəd yoxdur, ya da ən sondadır. Deməli, dövr element sayı qədər işləyəcək.
+# Yəni, 6 element olsa 6 addım, 100 element olsa 100 addım lazımdır.    
+
+
+#O(n²) -> Quadratic Time
+print("Ədədlər:", numbers)
+
+for i in numbers:
+    for j in numbers:
+        print(i, j)
+
+#İç-içə 2 dövr var. i=5 olur və siyahının bütün elementlərini alır, sonra i=23 olur və yenə siyahının bütün
+#elementlərini alır. Beləcə sona qədər davam edir. Deməli, siyahıda 6 element varsa, 36 addım gedəcək.
+#Deməli, ümumi halda siyahıda n element varsa, n × n = n² əməliyyat yerinə yetirilir.Qeyd: Hər nested loop
+#avtomatik O(n²) deyil. Dövrlərin neçə dəfə işlədiyinə baxmaq lazımdır.
+
+
+#O(log n) -> Logarithmic Time
+#Məsələn, binary search necə işləyir? Tutaq ki, 1-dən 1000-ə qədər sıralanmış ədədlər var və mən bir ədəd 
+#axtarıram. Bunun üçün siyahını ortadan bölürəm və baxıram ki, axtardığım ədəd 500-dən böyükdürmü. Əgər 
+#böyükdürsə axtarış 500-dən sağda, əks halda solda gedəcək. Yəni hər dəfə axtarış edilən siyahını yarı 
+#qədər kiçildirəm. Bunu addım-addım yazanda təxminən 10 addıma axtardığımı tapa bilirəm. Deməli, 1000 
+#element arasında axtarış təxminən 10 addımla edilə bilər. Onda bu alqoritmin mürəkkəbliyi O(log⁡ n) olur.
+
+#Best, Average və Worst Case
+#Xətti axtarış üzərindən danışaq: Ən yaxşı hal nədir? Axtardığımız element siyahının ilk elementidir və
+# bir addıma tapacağıq. -> O(1) Ən pis variant isə element siyahının sonundadır və ya yoxdur. Bu zaman 
+#siyahının sonuna qədər getməli olacağıq. -> O(n)Ortalama halda təxminən n/2 element yoxlanılır.
+# Lakin yuxarıda dediyimiz kimi Big O constant-ları nəzərə almadığı üçün: O(n/2)=O(n) olacaq. Deməli, 
+#average case də O(n)-dir. Bəs Big O-da constant-ları niyə atırıq? Çünki n çox böyüdükdə bizi əsasən 
+#funksiyanın necə böyüdüyü maraqlandırır. Ona görə də 3*n+10 kimi bir durum varsa, buna O(n) deyə bilərik.
+
+
+#Space Complexity nədir(Yaddaş mürəkkəbliyi)?Space Complexity — proqramın işləməsi zamanı istifadə etdiyi
+#yaddaşın giriş məlumatlarının ölçüsündən asılı olaraq necə dəyişdiyini göstərir.
+
+def double_numbers(numbers):
+    result = []
+
+    for number in numbers:
+        result.append(number * 2)
+
+    return result
+#Əgər funksiya yalnız bir neçə dəyişəndən istifadə edirsə və girişin ölçüsü artdıqca əlavə yaddaş da 
+#artmırsa, adətən O(1) olur. Əgər n elementdən ibarət yeni siyahı yaradırsa, adətən O(n) olur.
+
+#Stack və Queue məlumatların saxlanılması və emal edilməsi üçün istifadə olunan xətti məlumat 
+# strukturlarıdır (Linear Data Structures). Hər ikisi ilə elementləri əlavə edə və silə bilirik. 
+# Lakin onların əsas fərqi elementlərin hansı ardıcıllıqla çıxarılmasıdır. Stack (Yığın) -> LIFO (Last In,
+#  First Out) prinsipi ilə işləyən məlumat strukturudur. Yəni struktura ən son əlavə edilən element ilk 
+# çıxarılır. Məsələn, fərz edək ki, üst-üstə kitablar yığırıq. Bu zaman ilk qoyulan kitab altda qalacaq.
+#  Ən son qoyulan kitab isə üstdə olacaq və avtomatik ilk onu götürə biləcəyik.
+#Bəs harada istifadə olunur? Funksiyaların çağırılmasının idarə edilməsi (call stack), recursion, undo/redo
+#əməliyyatları, brauzerdə geri qayıtma mexanizmi və Depth-First Search (DFS) kimi alqoritmlərdə istifadə 
+#oluna bilər.
+
+
+from collections import deque
+
+queue = deque()
+
+queue.append("A")
+queue.append("B")
+queue.append("C")
+
+print(queue)
+
+queue.popleft()
+
+print(queue)
+#Queue(Növbə) -> FIFO (First In, First Out) prinsipi ilə işləyən məlumat strukturudur. Yəni ilk əlavə 
+# edilən element ilk çıxarılır. Məsələn hər hansı bir yerdə növbə olanda hər zaman ilk gələn, ilk xidmət
+# alır.
+
+
+
+#Sıralama alqoritmləri(Sorting Algorithms)--Bubble Sort,Selection Sort,Insertion sort
+#Bubble Sort-siyahiya baxir dene dene sortlayir meselen bir kicik reqem varsa ortadadirsa en basa atir
+#sonra kecir o biri kicik reqem varsa ona,yeni dene dene isleyir
+numbers=[96, 5, 98, 4]
+def bubble_sort(numbers):
+    
+    n = len(numbers)
+    
+    for i in range(n):
+        
+        for j in range(0, n - i - 1):
+            
+            if numbers[j] > numbers[j + 1]:
+                
+                numbers[j], numbers[j + 1] = numbers[j + 1], numbers[j]
+
+    return numbers
+result=bubble_sort([96, 5, 98, 4])
+
+print(result)
+
+#Selection Sort-Hər dəfə elementlər arasından ən kiçiyini tapırıq və əvvələ gətiririk.
+#Insertion sort-İnsertion Sort-un məntiqi də belədir: soldakı hissəni sıralı saxlayırıq və hər yeni 
+#elementi düzgün yerə yerləşdirik.
