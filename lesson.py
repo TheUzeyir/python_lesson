@@ -567,3 +567,54 @@ yeni_saat = 6
 proqnoz = w * yeni_saat + b   #Tapılmış xəttdən istifadə edərək yeni qiymət proqnozlaşdırır:
 
 print("Proqnoz:", proqnoz)
+
+# List-də müəyyən elementi tapmaq üçün potensial olaraq elementləri bir-bir yoxlamaq lazım gəlir. 
+#Set isə hash-based struktur olduğuna görə average case-də elementi çox daha sürətli tapa bilir. 
+#Deməli struktur(Data Structure) seçimi proqramın sürətinə və istifadə etdiyi yaddaşa təsir edə bilər.
+#Data Structure məlumatın necə saxlandığını, alqoritm isə problem həll etmək üçün hansı addımların həyata
+#keçirildiyini göstərir.Alqoritm- müəyyən problemi həll etmək üçün sonlu və ardıcıl addımlar toplusudur.
+
+scores = [5, 23, 27, 1996, 20, 21]
+maks = scores[0]
+
+for score in scores:
+    if score > maks:
+        maks = score #ansver 1996
+
+
+#Bu alqoritmə linear search deyilir.::
+def linear_search(arr, target): #arr — axtarış aparacağımız siyahı.target — tapmaq istədiyimiz element.
+    #arr = scores, target = 20 olur.
+    for i in range(len(arr)):  #arr[i] — siyahının i indeksindəki elementi götürür.
+        
+        if arr[i] == target:
+            return i
+
+    return -1
+result = linear_search(scores, 20)
+print(result) #ansver 4
+
+def binary_search(arr, target):
+    
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+
+        if arr[mid] == target:
+            return mid
+
+        elif arr[mid] < target:
+            left = mid + 1
+
+        else:
+            right = mid - 1
+
+    return -1
+scores.sort()
+print("Ədədlər: ", scores)
+
+result = binary_search(scores, 20)
+
+print(result)
